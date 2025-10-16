@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ book.title }}</h2>
+<p><strong>Author:</strong> {{ book.author }}</p>
+<p>{{ book.description }}</p>
+<p><strong>Year:</strong> {{ book.published_year }}</p>
+
+<h3>Tags</h3>
+<ul>
+  {% for tag in book.tags.all %}
+    <li>{{ tag.name }} (<a href="{% url 'library:remove_tag_from_book' book.pk tag.pk %}">remove</a>)</li>
+  {% empty %}
+    <li>No tags yet.</li>
+  {% endfor %}
+</ul>
+
+<h4>Add an existing tag:</h4>
+<form method="get" action="">
+  <ul>
+  {% for tag in tag_list|default:tags %}
+    <!-- optional: we’ll show tags list on same page if we pass it; otherwise ignore -->
+  {% endfor %}
+  </ul>
+</form>
+<p>Go to <a href="{% url 'library:tag_list_create' %}">Tags</a> to create new tags.</p>
+
+<p>
+  <a href="{% url 'library:book_update' book.pk %}">Edit</a> |
+  <a href="{% url 'library:book_delete' book.pk %}">Delete</a>
+</p>
+
+<h3>Notes</h3>
+<p><a href="{% url 'library:note_create' book.pk %}">+ Add Note</a></p>
+<ul>
+  {% for note in book.notes.all %}
+    <li>
+      {{ note.text }} — {{ note.created_at|date:"Y-m-d H:i" }}
+      [<a href="{% url 'library:note_update' note.pk %}">edit</a> |
+       <a href="{% url 'library:note_delete' note.pk %}">delete</a>]
+    </li>
+  {% empty %}
+    <li>No notes yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
