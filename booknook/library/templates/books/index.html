@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>My Books</h2>
-<p><a href="{% url 'library:book_create' %}">+ Add a Book</a></p>
+<p><a href="{% url 'library:book_create' %}">+ Add Book</a></p>
 <ul>
   {% for book in books %}
-    <li>
-      <a href="{% url 'library:book_detail' book.pk %}">{{ book.title }}</a> by {{ book.author }}
-    </li>
+    <li><a href="{% url 'library:book_detail' book.pk %}">{{ book.title }}</a> by {{ book.author }}</li>
   {% empty %}
     <li>No books yet.</li>
   {% endfor %}

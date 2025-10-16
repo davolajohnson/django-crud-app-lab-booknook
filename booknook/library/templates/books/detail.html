@@ -9,20 +9,9 @@
 <ul>
   {% for tag in book.tags.all %}
     <li>{{ tag.name }} (<a href="{% url 'library:remove_tag_from_book' book.pk tag.pk %}">remove</a>)</li>
-  {% empty %}
-    <li>No tags yet.</li>
-  {% endfor %}
+  {% empty %}<li>No tags yet.</li>{% endfor %}
 </ul>
-
-<h4>Add an existing tag:</h4>
-<form method="get" action="">
-  <ul>
-  {% for tag in tag_list|default:tags %}
-    <!-- optional: we’ll show tags list on same page if we pass it; otherwise ignore -->
-  {% endfor %}
-  </ul>
-</form>
-<p>Go to <a href="{% url 'library:tag_list_create' %}">Tags</a> to create new tags.</p>
+<p>Manage tags at <a href="{% url 'library:tag_list_create' %}">/tags</a>.</p>
 
 <p>
   <a href="{% url 'library:book_update' book.pk %}">Edit</a> |
@@ -38,8 +27,7 @@
       [<a href="{% url 'library:note_update' note.pk %}">edit</a> |
        <a href="{% url 'library:note_delete' note.pk %}">delete</a>]
     </li>
-  {% empty %}
-    <li>No notes yet.</li>
-  {% endfor %}
+  {% empty %}<li>No notes yet.</li>{% endfor %}
 </ul>
 {% endblock %}
+

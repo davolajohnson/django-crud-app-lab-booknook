@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Delete this note?</h2>
-<form method="post">
-  {% csrf_token %}
-  <button type="submit">Yes, delete</button>
-</form>
+<form method="post">{% csrf_token %}<button type="submit">Yes, delete</button></form>
 {% endblock %}
